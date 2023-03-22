@@ -4,10 +4,10 @@
 #include <string.h>
 #include "monty.h"
 
-FILE *open_file(char *filename);
-void close_file(FILE *fp, char *filename);
-void check_line(int tmp, char *line, char *filename, FILE *fp);
+bus_t bus;
 
+FILE *open_file(char *filename);
+void close_file(char *filename);
 
 /**
   * main - monty bytecodes interpreter
@@ -44,10 +44,12 @@ int main(int argc, char **argv)
 
 		line[strlen(line) - 1] = '\0'; /* strip newline character */
 		linenumber++;
-		execute_opcode(line, linenumber);
+		bus.file = fp;
+		bus.lifi - linenumber;
+		execute_opcode(line);
 	}
 
-	close_file(fp, argv[1]);
+	close_file(argv[1]);
 	free(line);
 
 	return (EXIT_SUCCESS);
@@ -77,9 +79,9 @@ FILE *open_file(char *filename)
   * @fd: file pointer for the file
   * @filename: name of the file
   */
-void close_file(FILE *fp, char *filename)
+void close_file(char *filename)
 {
-	if (fclose(fp) != 0)
+	if (fclose(bus.file) != 0)
 	{
 		fprintf(stderr, "Error: Can't close file %s\n", filename);
 		exit (EXIT_FAILURE);

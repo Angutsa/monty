@@ -2,7 +2,7 @@
 #include <string.h>
 #include "monty.h"
 
-void call_opcode(char *instruction, char *arg, int linenumber);
+void call_opcode();
 
 /** TODO: Delete these temps **/
 void f_push(stack_t **stack, unsigned int line_number)
@@ -15,12 +15,13 @@ void f_pall(stack_t **stack, unsigned int line_number)
 	printf("pall function called\n");
 }
 
+
+
 /**
   * execute_opcode - gets and executes the instruction
   * @line: entire line from monty file
-  * @linenumber: line number of the opcode to execute
   */
-void execute_opcode(char *line, int linenumber)
+void execute_opcode(char *line)
 {
 	char *instruction, *arg, *tmp;
 	int i;
@@ -53,18 +54,15 @@ void execute_opcode(char *line, int linenumber)
 	}
 
 	/** Compare and execute instruction */
-	call_opcode(instruction, arg, linenumber);
-	
-	/** TODO: Add implementation for bus struct */
+	bus.content = instruction;
+	bus.arg = arg;
+	call_opcode();
 }
 
 /**
-  * call_opcode - executes the instruction in the line
-  * @instruction: monty instruction
-  * @arg: argument to monty instruction
-  * @arg: linenumber of argument
+  * call_opcode - executes the instruction
   */
-void call_opcode(char *instruction, char *arg, int linenumber)
+void call_opcode()
 {
 	int i;
 	instruction_t opcode_list[] = {
@@ -80,14 +78,14 @@ void call_opcode(char *instruction, char *arg, int linenumber)
 
 	for (i = 0; opcode_list[i].opcode != NULL; i++)
 	{
-		if (strcmp(instruction, opcode_list[i].opcode) == 0)
+		if (strcmp(bus.content, opcode_list[i].opcode) == 0)
 		{
-			opcode_list[i].f(NULL, linenumber);
+			opcode_list[i].f(NULL, bus.lifi);
 			return;
 		}
 	}
 	
-	fprintf(stderr, "L%d: unknown instruction %s\n", linenumber,
-			instruction);
+	fprintf(stderr, "L%d: unknown instruction %s\n", bus.lifi,
+			bus.content);
 	exit (EXIT_FAILURE);
 }

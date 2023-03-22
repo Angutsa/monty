@@ -54,10 +54,9 @@ typedef struct bus_s
 
 extern bus_t bus;
 
-
 /************************* PROTOTYPES ***********************************/
 
-void execute_opcode(char *line, int linenumber);
+void execute_opcode(char *line);
 
 void f_push(stack_t **head, unsigned int number);
 void f_pall(stack_t **head, unsigned int number);
