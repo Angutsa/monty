@@ -2,6 +2,8 @@
 
 #define MONTY_H
 
+#include <stdlib.h>
+
 /************************ STRUCTURES *********************************/
 
 /**
@@ -38,6 +40,6 @@ typedef struct instruction_s
 
 /************************* PROTOTYPES ***********************************/
 
-void get_instruction(char *line, int linenumber);
+void execute_opcode(char *line, int linenumber);
 
 #endif

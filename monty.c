@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 		line[strlen(line) - 1] = '\0'; /* strip newline character */
 		linenumber++;
-		get_instruction(line, linenumber);
+		execute_opcode(line, linenumber);
 	}
 
 	close_file(fp, argv[1]);
