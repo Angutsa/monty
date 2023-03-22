@@ -38,6 +38,6 @@ typedef struct instruction_s
 
 /************************* PROTOTYPES ***********************************/
 
-
+void get_instruction(char *line, int linenumber);
 
 #endif
