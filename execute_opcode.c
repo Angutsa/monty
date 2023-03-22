@@ -4,19 +4,6 @@
 
 void call_opcode();
 
-/** TODO: Delete these temps **/
-void f_push(stack_t **stack, unsigned int line_number)
-{
-	printf("push function called\n");
-}
-
-void f_pall(stack_t **stack, unsigned int line_number)
-{
-	printf("pall function called\n");
-}
-
-
-
 /**
   * execute_opcode - gets and executes the instruction
   * @line: entire line from monty file

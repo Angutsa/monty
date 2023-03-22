@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 		line[strlen(line) - 1] = '\0'; /* strip newline character */
 		linenumber++;
 		bus.file = fp;
-		bus.lifi - linenumber;
+		bus.lifi = linenumber;
 		execute_opcode(line);
 	}
 
