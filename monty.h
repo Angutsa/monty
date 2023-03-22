@@ -37,9 +37,30 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+  * bus_s - struct to store opcode details
+  * @arg: opcode argument
+  * @file: monty file pointer
+  * @content: opcode instruction
+  * @lifi: opcode line number in monty file
+  */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+}  bus_t;
+
+extern bus_t bus;
+
 
 /************************* PROTOTYPES ***********************************/
 
 void execute_opcode(char *line, int linenumber);
 
-#endif
+void f_push(stack_t **head, unsigned int number);
+void f_pall(stack_t **head, unsigned int number);
+void f_pop(stack_t **head, unsigned int counter);
+
+#endif /* MONTY_H */
