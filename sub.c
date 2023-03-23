@@ -26,7 +26,7 @@ void f_sub(stack_t **head, unsigned int line_number)
 		exit_fail(head);
 	}
 
-	dif = atoi((*head)->n) - atoi(((*head)->next)->n);
+	dif = (*head)->n - ((*head)->next)->n;
 	*head = (*head)->next;
 	(*head)->n = dif;
 	free(tmp);

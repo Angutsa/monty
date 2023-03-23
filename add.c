@@ -26,7 +26,7 @@ void f_add(stack_t **head, unsigned int line_number)
 		exit_fail(head);
 	}
 
-	sum = atoi((*head)->n) + atoi(((*head)->next)->n);
+	sum = (*head)->n + ((*head)->next)->n;
 	*head = (*head)->next;
 	(*head)->n = sum;
 	free(tmp);

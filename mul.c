@@ -26,7 +26,7 @@ void f_mul(stack_t **head, unsigned int line_number)
 		exit_fail(head);
 	}
 
-	prod = atoi((*head)->n) - atoi(((*head)->next)->n);
+	prod = (*head)->n - ((*head)->next)->n;
 	*head = (*head)->next;
 	(*head)->n = prod;
 	free(tmp);
