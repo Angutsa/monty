@@ -16,14 +16,14 @@ void f_add(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n",
 				line_number);
-		exit(EXIT_FAILURE);
+		exit_fail(head);
 	}
 
 	if ((*head)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n",
 				line_number);
-		exit(EXIT_FAILURE);
+		exit_fail(head);
 	}
 
 	sum = (*head)->n + ((*head)->next)->n;

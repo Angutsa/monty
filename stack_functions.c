@@ -6,9 +6,11 @@
   */
 void free_stack(stack_t *head)
 {
-	/** TODO: implement free stack **/
-	printf("TODO: Implement free stack\n");
-	head = head + 1;
+	if (head == NULL)
+		return;
+
+	free_stack(head->next);
+	free(head);
 }
 
 
@@ -26,10 +28,7 @@ void addnode(stack_t **head, int n)
 	if (node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
+		exit_fail(head);
 	}
 
 	if (h == NULL)

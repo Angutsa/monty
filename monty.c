@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		else if (tmp == NULL)
 		{
 			fprintf(stderr, "Can't read file %s\n", argv[1]);
-			exit(EXIT_FAILURE);
+			exit_fail(&head);
 		}
 
 		line[strlen(line) - 1] = '\0'; /* strip newline character */
@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 	}
 
 	close_file(argv[1]);
+	free_stack(head);
 	free(line);
 	return (EXIT_SUCCESS);
 }

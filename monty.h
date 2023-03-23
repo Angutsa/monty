@@ -62,6 +62,7 @@ void execute_opcode(stack_t **head, char *line);
 void free_stack(stack_t *head);
 void addnode(stack_t **head, int n);
 void addqueue(stack_t **head, int n);
+void exit_fail(stack_t **head);
 
 void f_push(stack_t **head, unsigned int line_number);
 void f_pall(stack_t **head, unsigned int line_number);

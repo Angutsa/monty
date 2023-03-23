@@ -11,7 +11,7 @@ void call_opcode(stack_t **head);
   */
 void execute_opcode(stack_t **head, char *line)
 {
-	char *instruction, *arg, *tmp;
+	char *instruction = NULL, *arg, *tmp;
 	int i;
 
 	/** Separate instruction and argument */
@@ -23,10 +23,13 @@ void execute_opcode(stack_t **head, char *line)
 		}
 		else
 		{
-			instruction = &(line[i]);
+			instruction = (&(line[i]));
 			break;
 		}
 	}
+
+	if (instruction == NULL)
+		return;
 
 	arg = strchr(instruction, ' ');
 	if (arg != NULL)
@@ -76,5 +79,5 @@ void call_opcode(stack_t **head)
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", bus.lifi,
 			bus.content);
-	exit(EXIT_FAILURE);
+	exit_fail(head);
 }
