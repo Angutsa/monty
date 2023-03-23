@@ -2,14 +2,14 @@
 /**
  * f_pall - prints the stack
  * @head: stack head
- * @counter: no used
+ * @line_number: opcode line number on monty file (NOT USED)
  * Return: no return
-*/
-void f_pall(stack_t **head, unsigned int counter)
+ */
+void f_pall(stack_t **head, unsigned int line_number)
 {
 	stack_t *h;
 
-	(void)counter;
+	(void)line_number;
 
 	if (head == NULL || *head == NULL)
 	{

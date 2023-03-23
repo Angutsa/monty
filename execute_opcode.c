@@ -56,8 +56,8 @@ void call_opcode(stack_t **head)
 	int i;
 	instruction_t opcode_list[] = {
 		{"push", f_push},
-		{"pall", f_pall}, /*,
-		{"pint", f_pint},
+		{"pall", f_pall},
+		{"pint", f_pint}, /*
 		{"pop", f_pop},
 		{"swap", f_swap},
 		{"add", f_add},
