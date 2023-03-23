@@ -60,8 +60,8 @@ void call_opcode(stack_t **head)
 		{"pint", f_pint},
 		{"pop", f_pop},
 		{"swap", f_swap},
-		{"add", f_add}, /*
-		{"nop", f_nop},*/
+		{"add", f_add},
+		{"nop", f_nop},
 		{NULL, NULL}
 	};
 
