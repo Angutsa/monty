@@ -14,7 +14,6 @@ void execute_opcode(stack_t **head, char *line)
 	char *instruction = NULL, *arg, *tmp;
 	int i;
 
-	/** Separate instruction and argument */
 	for (i = 0; line[i] != '\0'; i++)
 	{
 		if (line[i] == ' ' || line[i] == 9)
@@ -31,6 +30,9 @@ void execute_opcode(stack_t **head, char *line)
 	if (instruction == NULL)
 		return;
 
+	if (instruction[i] == '#')
+		return;
+
 	arg = strchr(instruction, ' ');
 	if (arg != NULL)
 	{
@@ -44,7 +46,6 @@ void execute_opcode(stack_t **head, char *line)
 		*tmp = '\0';
 	}
 
-	/** Compare and execute instruction */
 	bus.content = instruction;
 	bus.arg = arg;
 	call_opcode(head);
@@ -65,6 +66,8 @@ void call_opcode(stack_t **head)
 		{"swap", f_swap},
 		{"add", f_add},
 		{"nop", f_nop},
+		{"mul", f_mul},
+		{"sub", f_sub},
 		{NULL, NULL}
 	};
 

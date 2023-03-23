@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- * f_pop - prints the top
+ * f_pop - removes the top element
  * @head: stack head
  * @line_number: line number on opcode monty file
  * Return: no return
