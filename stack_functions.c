@@ -19,10 +19,38 @@ void free_stack(stack_t *head)
   */
 void addnode(stack_t **head, int n)
 {
-	/** TODO: implement **/
-	printf("TODO: Implement addnode");
-	head = head + 1;
-	n++;
+	stack_t *node;
+	stack_t *h = *head;
+
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+
+	if (h == NULL)
+	{
+		node->n = n;
+		node->prev = NULL;
+		node->next = NULL;
+		*head = node;
+		return;
+	}
+
+	while (h->prev != NULL)
+	{
+		h = h->prev;
+	}
+
+	node->n = n;
+	node->prev = h->prev;
+	node->next = h;
+	h->prev = node;
+	*head = node;
 }
 
 /**
@@ -33,7 +61,7 @@ void addnode(stack_t **head, int n)
 void addqueue(stack_t **head, int n)
 {
 	/** TODO: implement **/
-	printf("TODO: Implement addqueue");
+	printf("TODO: Implement addqueue\n");
 	head = head + 1;
 	n++;
 }

@@ -2,13 +2,14 @@
 #include <string.h>
 #include "monty.h"
 
-void call_opcode();
+void call_opcode(stack_t **head);
 
 /**
   * execute_opcode - gets and executes the instruction
   * @line: entire line from monty file
+  * @head: stack head
   */
-void execute_opcode(char *line)
+void execute_opcode(stack_t **head, char *line)
 {
 	char *instruction, *arg, *tmp;
 	int i;
@@ -30,12 +31,12 @@ void execute_opcode(char *line)
 	arg = strchr(instruction, ' ');
 	if (arg != NULL)
 	{
-		while(arg[0] == ' ' || arg[0] == 9)
+		while (arg[0] == ' ' || arg[0] == 9)
 		{
 			arg = arg + 1;
 		}
 		arg[1] = '\0';
-	
+
 		tmp = strchr(instruction, ' ');
 		*tmp = '\0';
 	}
@@ -43,23 +44,24 @@ void execute_opcode(char *line)
 	/** Compare and execute instruction */
 	bus.content = instruction;
 	bus.arg = arg;
-	call_opcode();
+	call_opcode(head);
 }
 
 /**
   * call_opcode - executes the instruction
+  * @head: stack head
   */
-void call_opcode()
+void call_opcode(stack_t **head)
 {
 	int i;
 	instruction_t opcode_list[] = {
 		{"push", f_push},
-		{"pall", f_pall}/*,
+		{"pall", f_pall}, /*,
 		{"pint", f_pint},
 		{"pop", f_pop},
 		{"swap", f_swap},
 		{"add", f_add},
-		{"nop", f_nop}*/,
+		{"nop", f_nop},*/
 		{NULL, NULL}
 	};
 
@@ -67,12 +69,12 @@ void call_opcode()
 	{
 		if (strcmp(bus.content, opcode_list[i].opcode) == 0)
 		{
-			opcode_list[i].f(NULL, bus.lifi);
+			opcode_list[i].f(head, bus.line);
 			return;
 		}
 	}
-	
+
 	fprintf(stderr, "L%d: unknown instruction %s\n", bus.lifi,
 			bus.content);
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }

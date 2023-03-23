@@ -4,8 +4,6 @@
 #include <string.h>
 #include "monty.h"
 
-bus_t bus;
-
 FILE *open_file(char *filename);
 void close_file(char *filename);
 
@@ -19,7 +17,8 @@ int main(int argc, char **argv)
 {
 	FILE *fp;
 	int linenumber = 0, line_max = 1000;
-	char *line = malloc(sizeof(char) * line_max), *tmp;
+	char *line = malloc(sizeof(char) * line_max), *tmp = "";
+	stack_t *head = NULL;
 
 	if (argc != 2)
 	{
@@ -28,6 +27,8 @@ int main(int argc, char **argv)
 	}
 
 	fp = open_file(argv[1]);
+	bus.file = fp;
+	bus.lifi = 0; /* Edit once queue implementation is added */
 
 	while (tmp)
 	{
@@ -39,19 +40,17 @@ int main(int argc, char **argv)
 		else if (tmp == NULL)
 		{
 			fprintf(stderr, "Can't read file %s\n", argv[1]);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 
 		line[strlen(line) - 1] = '\0'; /* strip newline character */
 		linenumber++;
-		bus.file = fp;
-		bus.lifi = linenumber;
-		execute_opcode(line);
+		bus.line = linenumber;
+		execute_opcode(&head, line);
 	}
 
 	close_file(argv[1]);
 	free(line);
-
 	return (EXIT_SUCCESS);
 }
 
@@ -68,7 +67,7 @@ FILE *open_file(char *filename)
 	if (fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	return (fp);
@@ -76,7 +75,6 @@ FILE *open_file(char *filename)
 
 /**
   * close_file - closes the file
-  * @fd: file pointer for the file
   * @filename: name of the file
   */
 void close_file(char *filename)
@@ -84,6 +82,6 @@ void close_file(char *filename)
 	if (fclose(bus.file) != 0)
 	{
 		fprintf(stderr, "Error: Can't close file %s\n", filename);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 }
